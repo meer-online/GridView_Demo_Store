@@ -7,6 +7,7 @@
   <![endif]"-->
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag :defaults%>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -31,6 +32,14 @@
     		</div>
   		</div>
 	</div>
+	<% unless current_announcements.empty? %>
+		<div id="announcement">
+		  <% for announcement in current_announcements %>
+		    <p><!--%=h announcement.message %--></p>
+		  <% end %>
+		  <p><!--%= link_to "Hide this message", :url => "/controllers/hide_announcement.js.rjs", :remote => true %--></p>
+		</div>
+    <% end %>
 	<div class="container">
 		<div class= "row">
 			<div class="span10"><%= yield %></div>
